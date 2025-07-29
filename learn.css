@@ -1,0 +1,206 @@
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0fff4;
+  color: #2c3e50;
+  line-height: 1.6;
+  padding-bottom: 2rem;
+}
+
+/* Header */
+header {
+  background: linear-gradient(to right, #81ecec, #6c5ce7);
+  padding: 2.5rem 1.5rem 1.5rem 1.5rem;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+
+/* Back Navigation Button */
+.back-nav-button {
+  position: absolute;
+  left: 1.5rem;
+  top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.back-nav-button svg {
+  vertical-align: middle;
+}
+
+/* Logo */
+.logo {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+/* Navigation Bar */
+.main-nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+}
+
+.main-nav ul li a {
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+  background: #6c5ce7;
+  color: #fff;
+}
+
+/* Section Layout */
+section {
+  padding: 2rem 1.5rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+section h2 {
+  color: #0984e3;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+section p {
+  margin-bottom: 1rem;
+  font-size: 1.05rem;
+}
+
+/* Hero Section */
+.hero-section {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hero-section h1 {
+  font-size: 2.5rem;
+  color: #6c5ce7;
+  margin-bottom: 0.5rem;
+}
+
+.hero-section p {
+  color: #636e72;
+  font-size: 1.15rem;
+}
+
+/* Image Grid - 4 images in one row */
+.images {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  max-width: 1200px; /* Limits total width */
+  justify-content: center; /* Center grid items */
+}
+
+.images img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.images img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Process & Impact Lists */
+.process ul,
+.impact ul {
+  margin-left: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.process li,
+.impact li {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+}
+
+strong {
+  color: #00b894;
+}
+
+/* Join Section */
+.join a {
+  color: #6c5ce7;
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  background: linear-gradient(to right, #81ecec, #6c5ce7);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 900px) {
+  .images {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .images {
+    grid-template-columns: 1fr;
+  }
+
+  .images img {
+    height: 160px;
+  }
+
+  header .logo {
+    font-size: 1.5rem;
+  }
+
+  .main-nav ul {
+    gap: 1rem;
+    font-size: 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+}

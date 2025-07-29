@@ -1,0 +1,688 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; /* Ensure html and body take full viewport height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Background with image and gradient overlay - Transparency increased (less image visibility) */
+    background: linear-gradient(135deg, rgba(224, 242, 247, 0.7) 0%, rgba(243, 229, 245, 0.7) 100%), url('../assets/bg.jpeg') no-repeat center center/cover; /* Alpha increased from 0.3 to 0.7 */
+    background-attachment: fixed; /* Makes background fixed during scroll */
+    color: #0a0a0a; /* Changed from #222 (dark grey) to very dark grey/almost black */
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+/* Header (Consistent across pages) */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #64b5f6; /* Medium blue for header */
+    padding: 0.8rem 2.5rem;
+    color: white;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    flex-shrink: 0;
+}
+
+.logo {
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.2rem;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.3s ease;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: white;
+    transition: width 0.3s ease-out;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #e3f2fd;
+    transform: translateY(-1px);
+}
+
+/* Container for main content */
+.container {
+    max-width: 1200px;
+    margin: 2rem auto; /* Adjusted margin to account for header */
+    padding: 20px;
+    flex-grow: 1; /* Allow container to take available space */
+}
+
+/* Header Section (Original page header, now more attractive) */
+.header-section {
+    text-align: center;
+    margin-bottom: 50px;
+    animation: fadeInDown 1s ease-out;
+    background: rgba(255, 255, 255, 0.2); /* Slightly more opaque for better contrast */
+    backdrop-filter: blur(8px); /* Increased blur for a smoother frosted effect */
+    border-radius: 20px; /* More rounded corners */
+    padding: 40px; /* Increased padding for more space */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15); /* Stronger, softer shadow */
+    border: 1px solid rgba(255,255,255,0.4); /* Clearer, subtle border */
+}
+
+.header-section h1 {
+    color: #3f51b5; /* Darker blue for heading */
+    font-size: 3.5rem; /* Larger font size for impact */
+    margin-bottom: 20px; /* More space below heading */
+    font-weight: 700; /* Bolder font */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2); /* More pronounced text shadow */
+}
+
+.header-section p {
+    color: #0a0a0a; /* Changed from #424242 (dark grey) to very dark grey/almost black */
+    font-size: 1.3rem; /* Larger font size */
+    margin-bottom: 15px; /* More space below paragraph */
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.1); /* Subtle text shadow */
+}
+
+.header-section .subtitle {
+    color: #333333; /* Changed from #616161 (medium grey) to dark grey */
+    font-size: 1.1rem; /* Larger font size */
+    max-width: 700px; /* Wider subtitle */
+    margin: 0 auto;
+    line-height: 1.6;
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05); /* Very subtle text shadow */
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.stat-card {
+    background: rgba(255,255,255,0.35); /* Increased opacity from 0.25 to 0.35 */
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.3); /* Slightly more opaque border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 1s ease-out;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Added initial shadow */
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3); /* Stronger shadow on hover (increased from 0.25 to 0.3) */
+}
+
+.stat-icon {
+    width: 70px; /* Slightly smaller icon */
+    height: 70px;
+    margin: 0 auto 20px;
+    background: linear-gradient(45deg, #4CAF50, #8BC34A);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    animation: pulse 2s infinite;
+    position: relative; /* For pseudo-element icons */
+    overflow: hidden;
+}
+
+/* Stat Icons (using SVG masks) */
+.stat-icon::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background-color: white; /* Icon color */
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.stat-icon-co2::before {
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+}
+.stat-icon-water::before {
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.47-7-7.23 0-2.45 1.25-4.62 3.22-5.91L12 12l-1 7.93zm6.97-2.73c-1.14 1.25-2.67 2.15-4.38 2.58l-1.5-1.5 1.5-1.5 1.5-1.5 1.5 1.5c.43 1.71 1.33 3.24 2.58 4.38zM12 4.07c3.95.49 7 3.47 7 7.23 0 2.45-1.25 4.62-3.22 5.91L12 12l1-7.93zm-6.97 2.73c1.14-1.25 2.67-2.15 4.38-2.58l1.5 1.5-1.5 1.5-1.5 1.5-1.5-1.5c-.43-1.71-1.33-3.24-2.58-4.38z"/></svg>');
+}
+.stat-icon-energy::before {
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M13 1.01L6 9h5v14.99h2V9h5L13 1.01z"/></svg>');
+}
+.stat-icon-recycle::before {
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 2L4 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-8-3zm-1 13H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2z"/></svg>');
+}
+
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #3f51b5; /* Darker blue for numbers */
+    margin-bottom: 10px;
+}
+
+.stat-label {
+    color: #0a0a0a; /* Changed from #424242 (dark grey) to very dark grey/almost black */
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.stat-description {
+    color: #333333; /* Changed from #616161 (medium grey) to dark grey */
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.achievements {
+    margin-bottom: 50px;
+}
+
+.section-title {
+    color: #3f51b5; /* Darker blue */
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 15px;
+    animation: fadeIn 1s ease-out;
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
+}
+
+.section-description {
+    color: #333333; /* Changed from #616161 (medium grey) to dark grey */
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.achievement-card {
+    background: rgba(255,255,255,0.35); /* Increased opacity from 0.25 to 0.35 */
+    backdrop-filter: blur(15px);
+    border-radius: 15px;
+    padding: 25px;
+    border: 1px solid rgba(255,255,255,0.3); /* Slightly more opaque border */
+    transition: all 0.3s ease;
+    animation: slideInLeft 1s ease-out;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Added initial shadow */
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); /* Increased opacity from 0.3 to 0.4 */
+    transition: left 0.5s;
+}
+
+.achievement-card:hover::before {
+    left: 100%;
+}
+
+.achievement-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Stronger shadow on hover (increased from 0.35 to 0.4) */
+}
+
+.achievement-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.achievement-badge {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #FFD700, #FFA500); /* Gold gradient */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    font-size: 1.5rem;
+    animation: rotate 3s linear infinite;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Achievement Icons (using SVG masks) */
+.achievement-badge::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background-color: white; /* Icon color */
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+}
+
+.achievement-badge-eco::before {
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>');
+}
+.achievement-badge-water::before {
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.47-7-7.23 0-2.45 1.25-4.62 3.22-5.91L12 12l-1 7.93zm6.97-2.73c-1.14 1.25-2.67 2.15-4.38 2.58l-1.5-1.5 1.5-1.5 1.5-1.5 1.5 1.5c.43 1.71 1.33 3.24 2.58 4.38zM12 4.07c3.95.49 7 3.47 7 7.23 0 2.45-1.25 4.62-3.22 5.91L12 12l1-7.93zm-6.97 2.73c1.14-1.25 2.67-2.15 4.38-2.58l1.5 1.5-1.5 1.5-1.5 1.5-1.5-1.5c-.43-1.71-1.33-3.24-2.58-4.38z"/></svg>');
+}
+.achievement-badge-carbon::before {
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.47-7-7.23 0-2.45 1.25-4.62 3.22-5.91L12 12l-1 7.93zm6.97-2.73c-1.14 1.25-2.67 2.15-4.38 2.58l-1.5-1.5 1.5-1.5 1.5-1.5 1.5 1.5c.43 1.71 1.33 3.24 2.58 4.38zM12 4.07c3.95.49 7 3.47 7 7.23 0 2.45-1.25 4.62-3.22 5.91L12 12l1-7.93zm-6.97 2.73c1.14-1.25 2.67-2.15 4.38-2.58l1.5 1.5-1.5 1.5-1.5 1.5-1.5-1.5c-.43-1.71-1.33-3.24-2.58-4.38z"/></svg>');
+}
+.achievement-badge-green::before {
+    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black"><path d="M12 2L4 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-8-3zm-1 13H9v-2h2v2zm0-4H9V9h2v2zm0-4H9V5h2v2zm4 8h-2v-2h2v2zm0-4h-2V9h2v2zm0-4h-2V5h2v2z"/></svg>');
+}
+
+
+.achievement-info h3 {
+    color: #3f51b5; /* Darker blue */
+    font-size: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.achievement-info p {
+    color: #333333; /* Changed from #616161 (medium grey) to dark grey */
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+}
+
+.achievement-details {
+    color: #444444; /* Changed from #757575 (lighter grey) to darker grey */
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+.progress-section {
+    margin-bottom: 50px;
+}
+
+.progress-item {
+    background: rgba(255,255,255,0.35); /* Increased opacity from 0.25 to 0.35 */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255,255,255,0.3); /* Slightly more opaque border */
+    animation: fadeInRight 1s ease-out;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Added initial shadow */
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.progress-title {
+    color: #3f51b5; /* Darker blue */
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.progress-percentage {
+    color: #4CAF50; /* Green for percentage */
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.progress-subtitle {
+    color: #333333; /* Changed from #616161 (medium grey) to dark grey */
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 12px;
+    background: rgba(255,255,255,0.4); /* Increased opacity from 0.3 to 0.4 */
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    border-radius: 6px;
+    transition: width 2s ease-out;
+    animation: progressAnimation 2s ease-out;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 40px 0;
+}
+
+.reward-button, .recycle-button {
+    padding: 15px 30px;
+    color: white; /* White text for buttons */
+    text-decoration: none;
+    border-radius: 50px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    animation: bounceIn 1s ease-out;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border: none;
+    cursor: pointer;
+    min-width: 200px;
+}
+
+.reward-button {
+    background: linear-gradient(45deg, #4CAF50, #45a049); /* Green gradient */
+}
+
+.recycle-button {
+    background: linear-gradient(45deg, #2196F3, #1976D2); /* Blue gradient */
+}
+
+.reward-button:hover, .recycle-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3); /* Stronger shadow on hover */
+}
+
+.reward-button:hover {
+    background: linear-gradient(45deg, #45a049, #4CAF50);
+}
+
+.recycle-button:hover {
+    background: linear-gradient(45deg, #1976D2, #2196F3);
+}
+
+.floating-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(255,255,255,0.8); /* Increased opacity from 0.7 to 0.8 */
+    border-radius: 50%;
+    animation: float 6s infinite linear;
+}
+
+.impact-section {
+    background: rgba(255,255,255,0.35); /* Increased opacity from 0.25 to 0.35 */
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 40px auto; /* Centered margin */
+    border: 1px solid rgba(255,255,255,0.3); /* More opaque border */
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Added initial shadow */
+}
+
+.impact-title {
+    color: #3f51b5; /* Darker blue */
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05);
+}
+
+.impact-description {
+    color: #333333; /* Changed from #616161 (medium grey) to dark grey */
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Footer (Consistent across pages) */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #42a5f5;
+    color: white;
+    font-size: 0.9rem;
+    box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+footer a {
+    color: #e3f2fd;
+    text-decoration: none;
+    margin: 0 0.4rem;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: white;
+}
+
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes progressAnimation {
+    from { width: 0%; }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-section h1 { /* Changed from .header h1 */
+        font-size: 2.2rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .achievement-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 15px;
+        margin: 1rem auto; /* Adjusted margin for smaller screens */
+    }
+
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .reward-button, .recycle-button {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .stat-icon {
+        width: 60px; /* Smaller icons on mobile */
+        height: 60px;
+    }
+    .achievement-badge {
+        width: 50px; /* Smaller badges on mobile */
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-section h1 { /* Changed from .header h1 */
+        font-size: 1.8rem;
+    }
+    
+    .stat-card {
+        padding: 20px;
+    }
+    
+    .achievement-card {
+        padding: 20px;
+    }
+
+    .impact-section {
+        padding: 25px;
+    }
+
+    /* Header adjustments for very small screens */
+    header {
+        flex-direction: column;
+        padding: 0.6rem 1rem;
+    }
+    .logo {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+    nav ul {
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    nav ul li a {
+        font-size: 0.9rem;
+    }
+}
